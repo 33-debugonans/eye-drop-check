@@ -1,77 +1,174 @@
 <!doctype html><html lang="ko"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#5878e8"><link rel="manifest" href="manifest.webmanifest">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#5a77e6"><link rel="manifest" href="manifest.webmanifest">
 <title>자기 전 안약 체크</title>
 <style>
-:root{--ink:#151a42;--blue:#365df0;--line:#e5e4f1;--purple:#e5dfff}
+:root{--ink:#171b43;--blue:#3159ef;--line:rgba(211,211,230,.58);--panel:#fbfaff}
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;color:var(--ink)}
-body{background:#7dbaff url("background.jpg") center/cover fixed no-repeat;padding:12.3vh 0 7vh}
-.app{width:min(90.5vw,780px);margin:0 auto}
-.titleWrap{position:relative;width:100%;aspect-ratio:782/70}
-.titleImg{position:absolute;inset:0;width:100%;height:100%;display:block}
-.winHit{position:absolute;top:0;height:100%;background:transparent;border:0}
+html,body{margin:0;width:100%;min-height:100%;font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;color:var(--ink)}
+body{
+ min-height:100svh;
+ /* 시안 전체를 그대로 깔아 색감/하늘/꽃밭의 위치와 비율을 기준으로 삼음 */
+ background:#82bbf8 url("reference-bg.jpg") center top/100% 100% no-repeat fixed;
+ overflow-x:hidden;
+}
+.app{
+ position:relative;
+ width:90.5vw;
+ height:77.4svh;
+ margin:12.37svh auto 0;
+}
+.titleWrap{
+ width:100%;
+ height:4.62svh;
+ min-height:46px;
+ max-height:71px;
+}
+.titleImg{display:block;width:100%;height:100%;object-fit:fill}
 .panel{
-  margin:0;border:1.5px solid #aeb0df;border-radius:25px;
-  background:rgba(253,252,255,.982);padding:25px 12px 15px;
-  box-shadow:none;
+ height:72.8svh;
+ min-height:720px;
+ max-height:1119px;
+ border:1.2px solid #aaaee0;
+ border-radius:24px;
+ background:rgba(252,251,255,.975);
+ padding:2.25svh 1.15vw 1.2svh;
+ box-shadow:none;
+ display:flex;
+ flex-direction:column;
 }
-.head{display:grid;grid-template-columns:62px 1fr 62px;align-items:center;gap:10px;margin:0 14px 20px}
-.month{text-align:center;font-size:clamp(24px,4.25vw,35px);font-weight:650;letter-spacing:-1px}
+.head{
+ flex:0 0 auto;
+ display:grid;
+ grid-template-columns:7.8% 1fr 7.8%;
+ align-items:center;
+ gap:3%;
+ margin:0 3.2% 1.25svh;
+}
+.month{
+ text-align:center;
+ font-size:clamp(22px,3.8vw,34px);
+ font-weight:650;
+ letter-spacing:-1.1px;
+ line-height:1;
+}
 .nav{
-  height:59px;border:1px solid #c8c2ed;border-radius:8px;background:#eee9ff;
-  color:#151a42;font-size:35px;font-weight:400;box-shadow:none
+ width:100%;
+ aspect-ratio:1/1;
+ max-height:60px;
+ border:1px solid #c9c3ed;
+ border-radius:8px;
+ background:#eeeaff;
+ color:#171b43;
+ font-size:clamp(25px,4vw,34px);
+ font-weight:400;
+ box-shadow:none;
+ padding:0;
 }
-.week,.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}
-.week div{text-align:center;font-size:14px;font-weight:500;color:#555a7e;padding:5px 0 10px}
-.week div:first-child{color:#ed5d7d}.week div:last-child{color:#3159e8}
+.week{
+ flex:0 0 auto;
+ display:grid;
+ grid-template-columns:repeat(7,minmax(0,1fr));
+ gap:.7%;
+ margin-bottom:.45svh;
+}
+.week div{
+ text-align:center;
+ font-size:clamp(10px,1.75vw,14px);
+ font-weight:500;
+ color:#555a7e;
+ padding:.4svh 0 .65svh;
+}
+.week div:first-child{color:#ef5d7d}.week div:last-child{color:#3159e8}
+.grid{
+ flex:1 1 auto;
+ min-height:0;
+ display:grid;
+ grid-template-columns:repeat(7,minmax(0,1fr));
+ grid-auto-rows:1fr;
+ gap:.7%;
+}
 .day{
- position:relative;min-height:126px;border:1px solid #e3e2ef;border-radius:13px;
- background:rgba(251,250,255,.68);display:flex;align-items:center;justify-content:center;
- overflow:hidden;color:var(--ink);padding:0;box-shadow:none
+ position:relative;
+ min-height:0;
+ border:1px solid var(--line);
+ border-radius:12px;
+ background:rgba(250,249,254,.52);
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ overflow:hidden;
+ color:var(--ink);
+ padding:0;
+ box-shadow:none;
 }
 .empty{visibility:hidden}
-.today{border:2px solid var(--blue);background:rgba(255,255,255,.78)}
-.content{position:relative;z-index:2;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center}
-.num{font-size:17px;font-weight:560;line-height:1}
-.mark{font-size:12.5px;font-weight:520;color:#58649a;line-height:1;font-variant-numeric:tabular-nums}
+.today{border:2px solid var(--blue);background:rgba(255,255,255,.72)}
+.content{
+ position:relative;z-index:2;width:100%;height:100%;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;
+ gap:.42svh;text-align:center;
+}
+.num{font-size:clamp(14px,2.2vw,18px);font-weight:560;line-height:1}
+.mark{font-size:clamp(10px,1.6vw,13px);font-weight:520;color:#59639a;line-height:1;font-variant-numeric:tabular-nums}
 .doneCircle{
- position:absolute;z-index:0;width:min(76%,78px);aspect-ratio:1;border-radius:50%;
- left:50%;top:52%;transform:translate(-50%,-50%);background:rgba(226,219,255,.68)
+ position:absolute;z-index:0;
+ width:70%;max-width:78px;aspect-ratio:1;border-radius:50%;
+ left:50%;top:52%;transform:translate(-50%,-50%);
+ background:rgba(225,219,255,.64)
 }
-.miniBottle{position:absolute;z-index:3;left:9px;top:9px;width:22px;height:28px;object-fit:contain}
-.missed{background:rgba(255,249,251,.78)}.missMark{font-size:29px;color:#d62e4a;font-weight:650;line-height:1}
+.miniBottle{
+ position:absolute;z-index:3;
+ left:7%;top:6%;
+ width:26%;max-width:30px;
+ height:auto;
+ object-fit:cover;
+ border-radius:7px;
+ mix-blend-mode:multiply;
+}
+.missed{background:rgba(255,249,251,.70)}
+.missMark{font-size:clamp(24px,3.2vw,30px);color:#d62e4a;font-weight:650;line-height:1}
 .legend{
- margin-top:18px;padding:13px 9px;border:1px solid #dedbed;border-radius:9px;
- background:rgba(248,246,255,.82);display:flex;justify-content:space-around;gap:5px;
- font-size:11px;font-weight:520;color:#4c5074
+ flex:0 0 auto;
+ margin-top:1.35svh;
+ min-height:5.3svh;
+ padding:.7svh 1%;
+ border:1px solid rgba(218,215,236,.8);
+ border-radius:9px;
+ background:rgba(247,245,255,.78);
+ display:flex;align-items:center;justify-content:space-around;gap:1%;
+ font-size:clamp(8.5px,1.45vw,11px);font-weight:520;color:#4c5074
 }
-.legend span{display:flex;align-items:center;gap:6px}.lg{width:28px;height:28px;border-radius:50%;display:inline-grid;place-items:center}
-.lgd{background:rgba(225,219,255,.8)}.lgx{background:#ffc8d2;color:#c9233d;font-size:20px}.lgt{border:1.8px solid var(--blue);background:#fff}.lgn{border:1.5px solid #d8dae6;background:#fff}
+.legend span{display:flex;align-items:center;gap:5px;white-space:nowrap}
+.lg{width:clamp(21px,3.3vw,28px);aspect-ratio:1;border-radius:50%;display:inline-grid;place-items:center}
+.lgd{background:rgba(225,219,255,.8)}.lgx{background:#ffc8d2;color:#c9233d;font-size:20px}
+.lgt{border:1.8px solid var(--blue);background:#fff}.lgn{border:1.5px solid #d8dae6;background:#fff}
 .hint{display:none}
 dialog{border:1px solid #6675cf;padding:0;width:min(88vw,370px);box-shadow:none}
 dialog::backdrop{background:#1c275c55}.modalTitle{background:#5878e8;color:#fff;font-weight:650;padding:9px 12px}
 .modalBody{padding:20px;text-align:center}.modalBody h2{margin:0 0 5px}.modalBody p{color:#686e91}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.btn{border:1px solid #cbc7e7;padding:12px;font-weight:650;background:#f1eff8}.yes{background:#e5e0ff}
-.timeBox{display:none;margin-top:13px;text-align:left}.timeBox label{display:block;font-size:12px;color:#666d90;margin-bottom:6px}.timeBox input{width:100%;padding:11px;font:inherit}.small{font-size:10px;color:#969bb1;margin-top:6px}
-@media(max-width:500px){
- body{padding:12.3vh 0 5vh}.app{width:90.5vw}
- .panel{padding:19px 8px 12px;border-radius:21px}
- .head{grid-template-columns:48px 1fr 48px;margin:0 10px 15px}.nav{height:48px;font-size:28px}.month{font-size:25px}
- .week,.grid{gap:4px}.week div{font-size:11.5px}
- .day{min-height:92px;border-radius:10px}.num{font-size:15px}.mark{font-size:10.7px}
- .doneCircle{width:min(73%,63px)}.miniBottle{width:18px;height:23px;left:5px;top:6px}
- .legend{font-size:9px;padding:10px 4px}.lg{width:23px;height:23px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}
+.btn{border:1px solid #cbc7e7;padding:12px;font-weight:650;background:#f1eff8}.yes{background:#e5e0ff}
+.timeBox{display:none;margin-top:13px;text-align:left}.timeBox label{display:block;font-size:12px;color:#666d90;margin-bottom:6px}
+.timeBox input{width:100%;padding:11px;font:inherit}.small{font-size:10px;color:#969bb1;margin-top:6px}
+
+/* 아주 낮은 화면에서도 기능이 잘리지 않게만 보정 */
+@media(max-height:800px){
+ .app{margin-top:7vh;height:auto}
+ .panel{height:auto;min-height:690px}
+ .grid{min-height:470px}
 }
-</style></head><body><main class="app">
-<div class="titleWrap"><img class="titleImg" src="titlebar.png" alt="자기 전 안약 체크"></div>
-<section class="panel">
-<div class="head"><button class="nav" id="prev">‹</button><div class="month" id="month"></div><button class="nav" id="next">›</button></div>
-<div class="week"><div>일</div><div>월</div><div>화</div><div>수</div><div>목</div><div>금</div><div>토</div></div>
-<div class="grid" id="grid"></div>
-<div class="legend"><span><i class="lg lgd"></i>복용 완료</span><span><i class="lg lgx">×</i>미복용</span><span><i class="lg lgt"></i>오늘</span><span><i class="lg lgn"></i>기록 없음</span></div>
-<div class="hint">날짜를 눌러 점안 여부를 기록하거나 수정하세요.</div>
-</section></main>
+</style></head><body>
+<main class="app">
+ <div class="titleWrap"><img class="titleImg" src="titlebar.jpg" alt="자기 전 안약 체크"></div>
+ <section class="panel">
+  <div class="head"><button class="nav" id="prev">‹</button><div class="month" id="month"></div><button class="nav" id="next">›</button></div>
+  <div class="week"><div>일</div><div>월</div><div>화</div><div>수</div><div>목</div><div>금</div><div>토</div></div>
+  <div class="grid" id="grid"></div>
+  <div class="legend"><span><i class="lg lgd"></i>복용 완료</span><span><i class="lg lgx">×</i>미복용</span><span><i class="lg lgt"></i>오늘</span><span><i class="lg lgn"></i>기록 없음</span></div>
+  <div class="hint">날짜를 눌러 점안 여부를 기록하거나 수정하세요.</div>
+ </section>
+</main>
 <dialog id="dlg"><div class="modalTitle">안약 체크</div><div class="modalBody"><h2 id="q">안약 넣었나요?</h2><p id="sel"></p>
 <div class="timeBox" id="timeBox"><label>점안 시간을 직접 입력하세요.</label><input type="time" id="timeInput"><div class="small">과거 기록과 자동 X도 나중에 수정할 수 있어요.</div></div>
 <div class="actions" id="actions"></div></div></dialog>
@@ -89,7 +186,7 @@ function render(){applyMissed();const y=V.getFullYear(),m=V.getMonth(),g=$("#gri
 for(let i=0;i<new Date(y,m,1).getDay();i++)g.insertAdjacentHTML("beforeend",'<div class="day empty"></div>');
 for(let n=1;n<=new Date(y,m+1,0).getDate();n++){const d=new Date(y,m,n),k=key(d),r=R[k],b=document.createElement("button");b.className="day"+(same(d,now)?" today":"")+(r?.status==="missed"?" missed":"");
 let h=`<div class="content"><div class="num">${n}</div>`;if(r?.status==="done")h+=`<div class="mark">${to24(r.time)}</div>`;else if(r?.status==="missed")h+=`<div class="missMark">×</div>`;h+="</div>";
-if(r?.status==="done")h=`<div class="doneCircle"></div><img class="miniBottle" src="bottle-mini.png" alt="">`+h;b.innerHTML=h;b.onclick=()=>openDay(d);g.appendChild(b)}}
+if(r?.status==="done")h=`<div class="doneCircle"></div><img class="miniBottle" src="done-bottle.jpg" alt="">`+h;b.innerHTML=h;b.onclick=()=>openDay(d);g.appendChild(b)}}
 function setDone(k,t){R[k]={status:"done",time:t};save();$("#dlg").close();render()}
 function openDay(d){C=new Date(d);const k=key(C),r=R[k],n=new Date(),today=new Date(n.getFullYear(),n.getMonth(),n.getDate()),t=new Date(C);t.setHours(0,0,0,0);const past=t<today,ok=grace(t);
 $("#sel").textContent=`${C.getMonth()+1}월 ${C.getDate()}일`;$("#timeBox").style.display="none";$("#actions").innerHTML="";

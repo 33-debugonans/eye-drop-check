@@ -3,7 +3,7 @@
   "short_name": "안약 체크",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#7dbaff",
+  "background_color": "#82bbf8",
   "theme_color": "#5878e8",
   "icons": [
     {
