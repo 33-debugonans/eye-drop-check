@@ -1,46 +1,70 @@
-<!doctype html>
-<html lang="ko">
-<head>
+<!doctype html><html lang="ko"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#3157d6"><link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#5878e8"><link rel="manifest" href="manifest.webmanifest">
 <title>자기 전 안약 체크</title>
 <style>
-:root{--blue:#3158e8;--ink:#171b42;--line:#e2e1ef;--lav:#e9e4ff}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;color:var(--ink)}
-body{background:#78b9ff url("background.jpg") center/cover fixed no-repeat;padding:12.3vh 0 7vh}
-.app{width:min(90.5vw,782px);margin:0 auto}
-.titlebar{height:70px;border:1.5px solid #4964cf;background:#496ce0;display:flex;align-items:center;justify-content:space-between;padding:0 8px 0 13px;color:#fff}
-.brand{display:flex;align-items:center;gap:9px;font-size:clamp(18px,3.1vw,25px);font-weight:560;letter-spacing:-.3px}.brand img{width:48px;height:55px;object-fit:contain}.moon{font-size:1em}
-.wincontrols{display:flex;gap:4px}.wincontrols span{width:42px;height:39px;display:grid;place-items:center;background:#f7e8ff;border:1px solid #b9aee7;color:#171734;font-size:25px;line-height:1}
-.panel{margin:0;border:1.5px solid #a7a8df;border-radius:25px;background:rgba(253,252,255,.975);padding:21px 10px 15px;box-shadow:none}
-.head{display:grid;grid-template-columns:58px 1fr 58px;align-items:center;gap:10px;margin:0 10px 15px}
-.month{text-align:center;font-size:clamp(24px,4.3vw,34px);font-weight:680;letter-spacing:-1px}
-.nav{height:55px;border:1px solid #c9c3ee;border-radius:8px;background:#eee9ff;font-size:33px;color:#15183c;box-shadow:none}
-.week,.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
-.week div{text-align:center;font-size:14px;font-weight:540;color:#555a7e;padding:6px 0 10px}.week div:first-child{color:#ed5e7d}.week div:last-child{color:#3159e8}
-.day{position:relative;min-height:128px;border:1px solid var(--line);border-radius:12px;background:rgba(252,251,255,.72);display:flex;align-items:center;justify-content:center;overflow:hidden;color:var(--ink);padding:0;box-shadow:none}
-.empty{visibility:hidden}.today{border:2px solid var(--blue);background:rgba(255,255,255,.82)}
-.content{position:relative;z-index:2;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center}
-.num{font-size:17px;font-weight:560;line-height:1}.mark{font-size:12.5px;font-weight:520;color:#59639a;line-height:1;font-variant-numeric:tabular-nums}
-.doneCircle{position:absolute;z-index:0;width:min(74%,76px);aspect-ratio:1;border-radius:50%;left:50%;top:52%;transform:translate(-50%,-50%);background:rgba(224,217,255,.68)}
-.miniBottle{position:absolute;z-index:3;left:9px;top:9px;width:21px;height:27px;object-fit:contain}
-.missed{background:rgba(255,248,250,.8)}.missMark{font-size:28px;color:#d62f4b;font-weight:700;line-height:1}
-.legend{margin-top:17px;padding:12px 8px;border:1px solid #dedbed;border-radius:9px;background:rgba(249,247,255,.82);display:flex;justify-content:space-around;gap:5px;font-size:11px;font-weight:540;color:#4c5074}
-.legend span{display:flex;align-items:center;gap:5px}.lg{width:27px;height:27px;border-radius:50%;display:inline-grid;place-items:center}.lgd{background:rgba(224,217,255,.78)}.lgx{background:#ffc8d2;color:#c9233d;font-size:20px}.lgt{border:1.8px solid var(--blue);background:#fff}.lgn{border:1.5px solid #d8dae6;background:#fff}
-.hint{display:none}
-dialog{border:1px solid #6573cf;padding:0;width:min(88vw,370px);box-shadow:none}dialog::backdrop{background:#1c275c55}.modalTitle{background:#496ce0;color:#fff;font-weight:650;padding:9px 12px}.modalBody{padding:20px;text-align:center}.modalBody h2{margin:0 0 5px}.modalBody p{color:#686e91}.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.btn{border:1px solid #cbc7e7;padding:12px;font-weight:650;background:#f1eff8}.yes{background:#e5e0ff}.timeBox{display:none;margin-top:13px;text-align:left}.timeBox label{display:block;font-size:12px;color:#666d90;margin-bottom:6px}.timeBox input{width:100%;padding:11px;font:inherit}.small{font-size:10px;color:#969bb1;margin-top:6px}
-@media(max-width:500px){
- body{padding:12.3vh 0 5vh}.app{width:90.5vw}.titlebar{height:55px}.brand{font-size:17px}.brand img{width:37px;height:43px}.wincontrols span{width:34px;height:31px;font-size:21px}
- .panel{padding:17px 7px 12px;border-radius:21px}.head{grid-template-columns:48px 1fr 48px;margin:0 8px 12px}.nav{height:46px;font-size:28px}.month{font-size:25px}
- .week,.grid{gap:4px}.week div{font-size:11.5px}.day{min-height:96px;border-radius:10px}.num{font-size:15px}.mark{font-size:10.8px}.doneCircle{width:min(72%,62px)}.miniBottle{width:18px;height:23px;left:5px;top:6px}
- .legend{font-size:9px;padding:9px 4px}.lg{width:22px;height:22px}
+:root{--ink:#151a42;--blue:#365df0;--line:#e5e4f1;--purple:#e5dfff}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;color:var(--ink)}
+body{background:#7dbaff url("background.jpg") center/cover fixed no-repeat;padding:12.3vh 0 7vh}
+.app{width:min(90.5vw,780px);margin:0 auto}
+.titleWrap{position:relative;width:100%;aspect-ratio:782/70}
+.titleImg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.winHit{position:absolute;top:0;height:100%;background:transparent;border:0}
+.panel{
+  margin:0;border:1.5px solid #aeb0df;border-radius:25px;
+  background:rgba(253,252,255,.982);padding:25px 12px 15px;
+  box-shadow:none;
 }
-</style></head>
-<body><main class="app">
-<div class="titlebar">
-  <div class="brand"><img src="title-bottle.png" alt=""><span>자기 전 안약 체크</span><span class="moon">🌙</span></div>
-  <div class="wincontrols"><span>−</span><span>□</span><span>×</span></div>
-</div>
+.head{display:grid;grid-template-columns:62px 1fr 62px;align-items:center;gap:10px;margin:0 14px 20px}
+.month{text-align:center;font-size:clamp(24px,4.25vw,35px);font-weight:650;letter-spacing:-1px}
+.nav{
+  height:59px;border:1px solid #c8c2ed;border-radius:8px;background:#eee9ff;
+  color:#151a42;font-size:35px;font-weight:400;box-shadow:none
+}
+.week,.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}
+.week div{text-align:center;font-size:14px;font-weight:500;color:#555a7e;padding:5px 0 10px}
+.week div:first-child{color:#ed5d7d}.week div:last-child{color:#3159e8}
+.day{
+ position:relative;min-height:126px;border:1px solid #e3e2ef;border-radius:13px;
+ background:rgba(251,250,255,.68);display:flex;align-items:center;justify-content:center;
+ overflow:hidden;color:var(--ink);padding:0;box-shadow:none
+}
+.empty{visibility:hidden}
+.today{border:2px solid var(--blue);background:rgba(255,255,255,.78)}
+.content{position:relative;z-index:2;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center}
+.num{font-size:17px;font-weight:560;line-height:1}
+.mark{font-size:12.5px;font-weight:520;color:#58649a;line-height:1;font-variant-numeric:tabular-nums}
+.doneCircle{
+ position:absolute;z-index:0;width:min(76%,78px);aspect-ratio:1;border-radius:50%;
+ left:50%;top:52%;transform:translate(-50%,-50%);background:rgba(226,219,255,.68)
+}
+.miniBottle{position:absolute;z-index:3;left:9px;top:9px;width:22px;height:28px;object-fit:contain}
+.missed{background:rgba(255,249,251,.78)}.missMark{font-size:29px;color:#d62e4a;font-weight:650;line-height:1}
+.legend{
+ margin-top:18px;padding:13px 9px;border:1px solid #dedbed;border-radius:9px;
+ background:rgba(248,246,255,.82);display:flex;justify-content:space-around;gap:5px;
+ font-size:11px;font-weight:520;color:#4c5074
+}
+.legend span{display:flex;align-items:center;gap:6px}.lg{width:28px;height:28px;border-radius:50%;display:inline-grid;place-items:center}
+.lgd{background:rgba(225,219,255,.8)}.lgx{background:#ffc8d2;color:#c9233d;font-size:20px}.lgt{border:1.8px solid var(--blue);background:#fff}.lgn{border:1.5px solid #d8dae6;background:#fff}
+.hint{display:none}
+dialog{border:1px solid #6675cf;padding:0;width:min(88vw,370px);box-shadow:none}
+dialog::backdrop{background:#1c275c55}.modalTitle{background:#5878e8;color:#fff;font-weight:650;padding:9px 12px}
+.modalBody{padding:20px;text-align:center}.modalBody h2{margin:0 0 5px}.modalBody p{color:#686e91}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.btn{border:1px solid #cbc7e7;padding:12px;font-weight:650;background:#f1eff8}.yes{background:#e5e0ff}
+.timeBox{display:none;margin-top:13px;text-align:left}.timeBox label{display:block;font-size:12px;color:#666d90;margin-bottom:6px}.timeBox input{width:100%;padding:11px;font:inherit}.small{font-size:10px;color:#969bb1;margin-top:6px}
+@media(max-width:500px){
+ body{padding:12.3vh 0 5vh}.app{width:90.5vw}
+ .panel{padding:19px 8px 12px;border-radius:21px}
+ .head{grid-template-columns:48px 1fr 48px;margin:0 10px 15px}.nav{height:48px;font-size:28px}.month{font-size:25px}
+ .week,.grid{gap:4px}.week div{font-size:11.5px}
+ .day{min-height:92px;border-radius:10px}.num{font-size:15px}.mark{font-size:10.7px}
+ .doneCircle{width:min(73%,63px)}.miniBottle{width:18px;height:23px;left:5px;top:6px}
+ .legend{font-size:9px;padding:10px 4px}.lg{width:23px;height:23px}
+}
+</style></head><body><main class="app">
+<div class="titleWrap"><img class="titleImg" src="titlebar.png" alt="자기 전 안약 체크"></div>
 <section class="panel">
 <div class="head"><button class="nav" id="prev">‹</button><div class="month" id="month"></div><button class="nav" id="next">›</button></div>
 <div class="week"><div>일</div><div>월</div><div>화</div><div>수</div><div>목</div><div>금</div><div>토</div></div>
