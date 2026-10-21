@@ -21,14 +21,14 @@ body{
 .titleWrap{
  width:100%;
  height:4.62svh;
- min-height:46px;
- max-height:71px;
+ min-height:0;
+ max-height:none;
 }
 .titleImg{display:block;width:100%;height:100%;object-fit:fill}
 .panel{
  height:72.8svh;
- min-height:720px;
- max-height:1119px;
+ min-height:0;
+ max-height:none;
  border:1.2px solid #aaaee0;
  border-radius:24px;
  background:rgba(252,251,255,.975);
@@ -40,14 +40,14 @@ body{
 .head{
  flex:0 0 auto;
  display:grid;
- grid-template-columns:7.8% 1fr 7.8%;
+ grid-template-columns:7.1% 1fr 7.1%;
  align-items:center;
  gap:3%;
- margin:0 3.2% 1.25svh;
+ margin:0 4.6% 1.15svh;
 }
 .month{
  text-align:center;
- font-size:clamp(22px,3.8vw,34px);
+ font-size:clamp(18px,3.15vw,30px);
  font-weight:650;
  letter-spacing:-1.1px;
  line-height:1;
@@ -60,7 +60,7 @@ body{
  border-radius:8px;
  background:#eeeaff;
  color:#171b43;
- font-size:clamp(25px,4vw,34px);
+ font-size:clamp(20px,3.2vw,29px);
  font-weight:400;
  box-shadow:none;
  padding:0;
@@ -91,9 +91,9 @@ body{
 .day{
  position:relative;
  min-height:0;
- border:1px solid var(--line);
- border-radius:12px;
- background:rgba(250,249,254,.52);
+ border:1px solid rgba(220,219,235,.42);
+ border-radius:10px;
+ background:rgba(249,248,255,.42);
  display:flex;
  align-items:center;
  justify-content:center;
@@ -109,18 +109,18 @@ body{
  display:flex;flex-direction:column;align-items:center;justify-content:center;
  gap:.42svh;text-align:center;
 }
-.num{font-size:clamp(14px,2.2vw,18px);font-weight:560;line-height:1}
-.mark{font-size:clamp(10px,1.6vw,13px);font-weight:520;color:#59639a;line-height:1;font-variant-numeric:tabular-nums}
+.num{font-size:clamp(11px,1.72vw,15px);font-weight:540;line-height:1}
+.mark{font-size:clamp(9px,1.35vw,11.5px);font-weight:500;color:#59639a;line-height:1;font-variant-numeric:tabular-nums}
 .doneCircle{
  position:absolute;z-index:0;
- width:70%;max-width:78px;aspect-ratio:1;border-radius:50%;
+ width:64%;max-width:68px;aspect-ratio:1;border-radius:50%;
  left:50%;top:52%;transform:translate(-50%,-50%);
- background:rgba(225,219,255,.64)
+ background:rgba(226,220,255,.52)
 }
 .miniBottle{
  position:absolute;z-index:3;
- left:7%;top:6%;
- width:26%;max-width:30px;
+ left:10%;top:9%;
+ width:21%;max-width:24px;
  height:auto;
  object-fit:cover;
  border-radius:7px;
@@ -152,12 +152,6 @@ dialog::backdrop{background:#1c275c55}.modalTitle{background:#5878e8;color:#fff;
 .timeBox{display:none;margin-top:13px;text-align:left}.timeBox label{display:block;font-size:12px;color:#666d90;margin-bottom:6px}
 .timeBox input{width:100%;padding:11px;font:inherit}.small{font-size:10px;color:#969bb1;margin-top:6px}
 
-/* 아주 낮은 화면에서도 기능이 잘리지 않게만 보정 */
-@media(max-height:800px){
- .app{margin-top:7vh;height:auto}
- .panel{height:auto;min-height:690px}
- .grid{min-height:470px}
-}
 </style></head><body>
 <main class="app">
  <div class="titleWrap"><img class="titleImg" src="titlebar.jpg" alt="자기 전 안약 체크"></div>
