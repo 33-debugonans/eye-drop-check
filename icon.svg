@@ -1,5 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-<rect width="512" height="512" rx="96" fill="#5577e7"/>
-<path d="M256 70C210 145 135 231 135 317c0 70 54 125 121 125s121-55 121-125c0-86-75-172-121-247z" fill="#eee9ff"/>
-<path d="M190 319c0 39 29 69 66 69" fill="none" stroke="#fff" stroke-width="22" stroke-linecap="round"/>
+<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#4770e8"/><stop offset="1" stop-color="#8cc8ff"/></linearGradient></defs>
+<rect width="512" height="512" rx="92" fill="url(#sky)"/>
+<circle cx="90" cy="105" r="42" fill="#fff" opacity=".9"/><circle cx="145" cy="105" r="58" fill="#fff" opacity=".9"/><circle cx="205" cy="112" r="38" fill="#fff" opacity=".9"/>
+<g transform="translate(112 60) scale(4)">
+<defs><linearGradient id="bg" x1="0" x2="1"><stop stop-color="#f4d7ff"/><stop offset=".55" stop-color="#cbbcff"/><stop offset="1" stop-color="#8fa9ff"/></linearGradient></defs>
+<g transform="rotate(12 35 50)" stroke="#5368d8" stroke-width="2">
+<path d="M27 4h16v12l6 7v9H21v-9l6-7z" fill="#f8efff"/>
+<path d="M20 30h30l7 12v45c0 6-4 9-9 9H22c-5 0-9-3-9-9V42z" fill="url(#bg)"/>
+<rect x="17" y="52" width="36" height="23" rx="4" fill="#fff9ff" stroke="#9a91dd"/>
+<text x="35" y="63" text-anchor="middle" font-size="7" font-weight="800" fill="#5966cf">EYEDROP</text>
+<path d="M35 67c-5-5-11 3 0 10 11-7 5-15 0-10z" fill="#f5a5d8" stroke="none"/>
+</g></g>
+<path d="M60 438h392" stroke="#b9aaff" stroke-width="10"/>
 </svg>
