@@ -5,40 +5,40 @@
 <meta name="theme-color" content="#3157d6"><link rel="manifest" href="manifest.webmanifest">
 <title>자기 전 안약 체크</title>
 <style>
-:root{--blue:#3159e8;--ink:#12183f;--soft:#fdfcff;--lav:#e6e0ff}
+:root{--blue:#3158e8;--ink:#171b42;--line:#e2e1ef;--lav:#e9e4ff}
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;color:var(--ink)}
-body{background:#7abaff url("background.jpg") center/cover fixed no-repeat;padding:9.5vh 0 7vh}
-.app{width:min(91vw,790px);margin:0 auto}
-.titlebar{height:58px;border:2px solid #3156bd;background:linear-gradient(90deg,#315bdc,#6c85ed);display:flex;align-items:center;justify-content:space-between;padding:0 7px 0 14px;color:#fff;box-shadow:0 3px 0 #d8e5ff}
-.brand{display:flex;align-items:center;gap:8px;font-size:clamp(17px,3.3vw,25px);font-weight:600}.brand img{width:34px;height:41px;object-fit:contain}.moon{font-size:1em}
-.wincontrols{display:flex;gap:3px}.wincontrols span{width:40px;height:36px;display:grid;place-items:center;background:linear-gradient(#fff8ff,#efdfff);border:2px outset #f9eaff;color:#121532;font-size:25px;line-height:1}
-.panel{margin:0;border:2px solid #9fa4e3;border-radius:26px;background:rgba(253,252,255,.975);padding:22px 10px 15px;box-shadow:inset 0 0 0 2px #f0ecff,0 7px 20px #38509a20}
+body{background:#78b9ff url("background.jpg") center/cover fixed no-repeat;padding:12.3vh 0 7vh}
+.app{width:min(90.5vw,782px);margin:0 auto}
+.titlebar{height:70px;border:1.5px solid #4964cf;background:#496ce0;display:flex;align-items:center;justify-content:space-between;padding:0 8px 0 13px;color:#fff}
+.brand{display:flex;align-items:center;gap:9px;font-size:clamp(18px,3.1vw,25px);font-weight:560;letter-spacing:-.3px}.brand img{width:48px;height:55px;object-fit:contain}.moon{font-size:1em}
+.wincontrols{display:flex;gap:4px}.wincontrols span{width:42px;height:39px;display:grid;place-items:center;background:#f7e8ff;border:1px solid #b9aee7;color:#171734;font-size:25px;line-height:1}
+.panel{margin:0;border:1.5px solid #a7a8df;border-radius:25px;background:rgba(253,252,255,.975);padding:21px 10px 15px;box-shadow:none}
 .head{display:grid;grid-template-columns:58px 1fr 58px;align-items:center;gap:10px;margin:0 10px 15px}
-.month{text-align:center;font-size:clamp(24px,4.6vw,36px);font-weight:760;letter-spacing:-1px}
-.nav{height:54px;border:1.5px solid #c7bff2;border-radius:8px;background:linear-gradient(#fbf8ff,#e7e1ff);font-size:34px;color:#11163c;box-shadow:inset -2px -2px 0 #c7c0e2}
+.month{text-align:center;font-size:clamp(24px,4.3vw,34px);font-weight:680;letter-spacing:-1px}
+.nav{height:55px;border:1px solid #c9c3ee;border-radius:8px;background:#eee9ff;font-size:33px;color:#15183c;box-shadow:none}
 .week,.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
-.week div{text-align:center;font-size:14px;font-weight:620;color:#4f557d;padding:6px 0 9px}.week div:first-child{color:#ef5b7a}.week div:last-child{color:#3159e8}
-.day{position:relative;min-height:106px;border:1px solid #e2e2f1;border-radius:13px;background:linear-gradient(145deg,rgba(255,255,255,.90),rgba(249,248,255,.82));display:flex;align-items:center;justify-content:center;overflow:hidden;color:var(--ink);padding:0}
-.empty{visibility:hidden}.today{border:2px solid var(--blue);background:#fff}
+.week div{text-align:center;font-size:14px;font-weight:540;color:#555a7e;padding:6px 0 10px}.week div:first-child{color:#ed5e7d}.week div:last-child{color:#3159e8}
+.day{position:relative;min-height:128px;border:1px solid var(--line);border-radius:12px;background:rgba(252,251,255,.72);display:flex;align-items:center;justify-content:center;overflow:hidden;color:var(--ink);padding:0;box-shadow:none}
+.empty{visibility:hidden}.today{border:2px solid var(--blue);background:rgba(255,255,255,.82)}
 .content{position:relative;z-index:2;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center}
-.num{font-size:18px;font-weight:680;line-height:1}.mark{font-size:13px;font-weight:620;color:#5965a0;line-height:1;font-variant-numeric:tabular-nums}
-.doneCircle{position:absolute;z-index:0;width:min(78%,78px);aspect-ratio:1;border-radius:50%;left:50%;top:52%;transform:translate(-50%,-50%);background:radial-gradient(circle at 40% 35%,#f1edff,#e0d9ff 76%,#d8d0ff)}
-.miniBottle{position:absolute;z-index:3;left:8px;top:8px;width:22px;height:28px;object-fit:contain}
-.missed{background:#fff8fa}.missMark{font-size:30px;color:#d62d48;font-weight:850;line-height:1}
-.legend{margin-top:17px;padding:12px 8px;border:1px solid #ddd9ee;border-radius:9px;background:rgba(248,246,255,.9);display:flex;justify-content:space-around;gap:5px;font-size:11px;font-weight:650;color:#454a73}
-.legend span{display:flex;align-items:center;gap:5px}.lg{width:27px;height:27px;border-radius:50%;display:inline-grid;place-items:center}.lgd{background:#e1dbff}.lgx{background:#ffc4cf;color:#c9233d;font-size:21px}.lgt{border:2px solid var(--blue);background:#fff}.lgn{border:2px solid #d8dae7;background:#fff}
+.num{font-size:17px;font-weight:560;line-height:1}.mark{font-size:12.5px;font-weight:520;color:#59639a;line-height:1;font-variant-numeric:tabular-nums}
+.doneCircle{position:absolute;z-index:0;width:min(74%,76px);aspect-ratio:1;border-radius:50%;left:50%;top:52%;transform:translate(-50%,-50%);background:rgba(224,217,255,.68)}
+.miniBottle{position:absolute;z-index:3;left:9px;top:9px;width:21px;height:27px;object-fit:contain}
+.missed{background:rgba(255,248,250,.8)}.missMark{font-size:28px;color:#d62f4b;font-weight:700;line-height:1}
+.legend{margin-top:17px;padding:12px 8px;border:1px solid #dedbed;border-radius:9px;background:rgba(249,247,255,.82);display:flex;justify-content:space-around;gap:5px;font-size:11px;font-weight:540;color:#4c5074}
+.legend span{display:flex;align-items:center;gap:5px}.lg{width:27px;height:27px;border-radius:50%;display:inline-grid;place-items:center}.lgd{background:rgba(224,217,255,.78)}.lgx{background:#ffc8d2;color:#c9233d;font-size:20px}.lgt{border:1.8px solid var(--blue);background:#fff}.lgn{border:1.5px solid #d8dae6;background:#fff}
 .hint{display:none}
-dialog{border:2px solid #3155bb;padding:0;width:min(88vw,370px);box-shadow:8px 8px 0 #18327745}dialog::backdrop{background:#1c275c66}.modalTitle{background:#3157d6;color:#fff;font-weight:800;padding:9px 12px}.modalBody{padding:20px;text-align:center}.modalBody h2{margin:0 0 5px}.modalBody p{color:#686e91}.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.btn{border:2px outset #eeeaff;padding:12px;font-weight:800;background:#eeeef7}.yes{background:#ddd8ff}.timeBox{display:none;margin-top:13px;text-align:left}.timeBox label{display:block;font-size:12px;color:#666d90;margin-bottom:6px}.timeBox input{width:100%;padding:11px;font:inherit}.small{font-size:10px;color:#969bb1;margin-top:6px}
+dialog{border:1px solid #6573cf;padding:0;width:min(88vw,370px);box-shadow:none}dialog::backdrop{background:#1c275c55}.modalTitle{background:#496ce0;color:#fff;font-weight:650;padding:9px 12px}.modalBody{padding:20px;text-align:center}.modalBody h2{margin:0 0 5px}.modalBody p{color:#686e91}.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.btn{border:1px solid #cbc7e7;padding:12px;font-weight:650;background:#f1eff8}.yes{background:#e5e0ff}.timeBox{display:none;margin-top:13px;text-align:left}.timeBox label{display:block;font-size:12px;color:#666d90;margin-bottom:6px}.timeBox input{width:100%;padding:11px;font:inherit}.small{font-size:10px;color:#969bb1;margin-top:6px}
 @media(max-width:500px){
- body{padding:9vh 0 5vh}.app{width:91vw}.titlebar{height:50px}.brand{font-size:18px}.brand img{width:29px;height:35px}.wincontrols span{width:34px;height:32px;font-size:22px}
- .panel{padding:17px 7px 12px;border-radius:21px}.head{grid-template-columns:49px 1fr 49px;margin:0 8px 12px}.nav{height:47px;font-size:29px}.month{font-size:27px}
- .week,.grid{gap:4px}.week div{font-size:12px}.day{min-height:91px;border-radius:11px}.num{font-size:16px}.mark{font-size:11.5px}.doneCircle{width:min(76%,67px)}.miniBottle{width:19px;height:24px;left:5px;top:6px}
- .legend{font-size:9.5px;padding:10px 4px}.lg{width:23px;height:23px}
+ body{padding:12.3vh 0 5vh}.app{width:90.5vw}.titlebar{height:55px}.brand{font-size:17px}.brand img{width:37px;height:43px}.wincontrols span{width:34px;height:31px;font-size:21px}
+ .panel{padding:17px 7px 12px;border-radius:21px}.head{grid-template-columns:48px 1fr 48px;margin:0 8px 12px}.nav{height:46px;font-size:28px}.month{font-size:25px}
+ .week,.grid{gap:4px}.week div{font-size:11.5px}.day{min-height:96px;border-radius:10px}.num{font-size:15px}.mark{font-size:10.8px}.doneCircle{width:min(72%,62px)}.miniBottle{width:18px;height:23px;left:5px;top:6px}
+ .legend{font-size:9px;padding:9px 4px}.lg{width:22px;height:22px}
 }
 </style></head>
 <body><main class="app">
 <div class="titlebar">
-  <div class="brand"><img src="bottle-mini.png" alt=""><span>자기 전 안약 체크</span><span class="moon">🌙</span></div>
+  <div class="brand"><img src="title-bottle.png" alt=""><span>자기 전 안약 체크</span><span class="moon">🌙</span></div>
   <div class="wincontrols"><span>−</span><span>□</span><span>×</span></div>
 </div>
 <section class="panel">
