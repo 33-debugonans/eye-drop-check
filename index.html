@@ -19,7 +19,11 @@ html,body{width:100%;height:100%;margin:0;overflow:hidden}
 body{
   font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;
   color:var(--ink);
-  background:#8cc3f7 url("background.jpg?v=18") center center / 100% 100% no-repeat;
+  background-color:#8cc3f7;
+  background-image:url("background.jpg?v=20");
+  background-position:center center;
+  background-size:cover;
+  background-repeat:no-repeat;
 }
 
 /* 시안 비율: 화면 아래에 꽃밭이 충분히 남도록 달력을 짧게 고정 */
@@ -27,7 +31,7 @@ body{
   position:relative;
   width:90.2vw;
   max-width:780px;
-  height:60.7svh;
+  height:81.2svh;
   margin:8.2svh auto 0;
 }
 .titlebar{
@@ -40,7 +44,7 @@ body{
   display:block;width:100%;height:100%;object-fit:fill;
 }
 .calendar{
-  height:56.25svh;
+  height:76.75svh;
   min-height:0;
   background:rgba(253,252,255,.985);
   border:1px solid rgba(120,126,194,.74);
@@ -203,7 +207,7 @@ dialog{
   padding:0;
   border:1.25px solid #6677d1;
   border-radius:15px;
-  overflow:hidden;
+  overflow:visible;
   background:#fbfaff;
   box-shadow:0 5px 0 rgba(56,67,137,.13);
 }
@@ -214,20 +218,23 @@ dialog::backdrop{background:rgba(30,42,88,.40)}
   position:relative;
   display:flex;
   align-items:center;
-  padding:0 52px 0 58px;
+  padding:0 52px 0 66px;
   background:linear-gradient(90deg,#3f70e9 0%,#6683e9 100%);
+  border-radius:14px 14px 0 0;
   color:#fff;
   font-size:clamp(13px,1.75vw,16px);
   font-weight:620;
 }
 .popup-bottle{
   position:absolute;
-  left:12px;top:50%;
-  width:38px;height:41px;
-  transform:translateY(-50%);
-  object-fit:cover;
-  object-position:45% 45%;
-  border-radius:2px;
+  left:14px;top:50%;
+  width:52px;height:auto;
+  transform:translate(-8px,-56%) rotate(-5deg);
+  object-fit:contain;
+  object-position:center;
+  border-radius:0;
+  z-index:3;
+  pointer-events:none;
 }
 .popup-close{
   position:absolute;
@@ -248,6 +255,7 @@ dialog::backdrop{background:rgba(30,42,88,.40)}
   padding:2.2svh 5.2% 2.0svh;
   text-align:center;
   background:linear-gradient(180deg,#fff 0%,#fbfaff 100%);
+  border-radius:0 0 14px 14px;
 }
 .popup-body h2{
   margin:0 0 .85svh;
@@ -286,7 +294,7 @@ dialog::backdrop{background:rgba(30,42,88,.40)}
 </head>
 <body>
 <main class="app">
-  <div class="titlebar"><img src="titlebar.jpg?v=18" alt="자기 전 안약 체크"></div>
+  <div class="titlebar"><img src="titlebar.jpg?v=20" alt="자기 전 안약 체크"></div>
   <section class="calendar">
     <div class="month-row">
       <button class="arrow" id="prev" aria-label="이전 달">‹</button>
@@ -306,7 +314,7 @@ dialog::backdrop{background:rgba(30,42,88,.40)}
 
 <dialog id="dlg">
   <div class="popup-head">
-    <img class="popup-bottle" src="bottle-popup.jpg?v=18" alt="">
+    <img class="popup-bottle" src="popup-bottle.png?v=20" alt="">
     <span>안약 체크</span>
     <button class="popup-close" id="closeDlg" aria-label="닫기">×</button>
   </div>
@@ -399,7 +407,7 @@ function render(){
     if(rec && rec.status==="yes"){
       cell.classList.add("done");
       const badge=document.createElement("div"); badge.className="done-badge";
-      const img=document.createElement("img"); img.src="bottle-mini.png?v=18"; img.alt="";
+      const img=document.createElement("img"); img.src="bottle-mini.png?v=20"; img.alt="";
       badge.appendChild(img); cell.appendChild(badge);
       core.appendChild(num);
       const tm=document.createElement("div"); tm.className="time"; tm.textContent=rec.time||"";
