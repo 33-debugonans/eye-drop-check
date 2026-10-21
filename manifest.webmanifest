@@ -1,1 +1,16 @@
-{"name":"자기 전 안약 체크","short_name":"안약 체크","start_url":"./","display":"standalone","background_color":"#f7f8fc","theme_color":"#6b7fd7","icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
+{
+  "name": "자기 전 안약 체크",
+  "short_name": "안약 체크",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#78b8ff",
+  "theme_color": "#3858d7",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
