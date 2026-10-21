@@ -1,254 +1,86 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#4b63d8">
-<link rel="manifest" href="manifest.webmanifest">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#3157d6"><link rel="manifest" href="manifest.webmanifest">
 <title>자기 전 안약 체크</title>
 <style>
-:root{
-  --blue:#3858d7; --deep:#1739a8; --lav:#e3ddff; --line:#cfd3ef;
-  --paper:#fbfbff; --miss:#ffd9df; --missText:#d43e55;
-}
-*{box-sizing:border-box}
-html,body{min-height:100%;margin:0}
+:root{--blue:#3158e8;--ink:#11173d;--lav:#e3ddff;--line:#dedff0}
+*{box-sizing:border-box} html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;color:var(--ink)}
 body{
-  font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;color:#161a3c;
-  background:
-    radial-gradient(circle at 15% 9%,#fff 0 3%,transparent 3.4%),
-    radial-gradient(circle at 70% 7%,#fff 0 4%,transparent 4.4%),
-    linear-gradient(#55a5ff 0 36%,#9ad4ff 36% 52%,#72bd59 52% 100%);
+ background:linear-gradient(#72b8ff 0 58%,#7bc45d 58% 100%);
+ background-attachment:fixed; padding:3.8vw 0 0;
 }
-body:before{
-  content:"";position:fixed;left:0;right:0;bottom:0;height:36%;pointer-events:none;
-  background:
-    radial-gradient(circle at 8% 84%,#fff7cf 0 3px,#f1b9df 4px 7px,transparent 8px),
-    radial-gradient(circle at 22% 74%,#fff7cf 0 3px,#fff 4px 8px,transparent 9px),
-    radial-gradient(circle at 46% 88%,#fff7cf 0 3px,#f3bce3 4px 8px,transparent 9px),
-    radial-gradient(circle at 70% 72%,#fff7cf 0 3px,#fff 4px 8px,transparent 9px),
-    radial-gradient(circle at 88% 84%,#fff7cf 0 3px,#f3bce3 4px 8px,transparent 9px),
-    linear-gradient(180deg,transparent,#75bf59 28%,#59a84a);
-  background-size:160px 120px,180px 130px,190px 140px,170px 125px,200px 145px,100% 100%;
-  z-index:-1;
+body:after{content:"";position:fixed;z-index:-1;left:0;right:0;bottom:0;height:28vh;background:url("meadow.png") bottom center/cover no-repeat}
+.app{width:min(92vw,790px);margin:0 auto 24px;border:2px solid #3155bb;background:#fff;box-shadow:0 10px 25px #22468d38}
+.approvedHeader{width:100%;display:block;height:auto}
+.panel{
+ margin:-1px 10px 10px;border:2px solid #a6a8e5;border-radius:28px;
+ background:linear-gradient(#fff,#fdfcff);padding:26px 12px 18px;box-shadow:inset 0 0 0 2px #f3efff
 }
-.app{width:min(94vw,650px);margin:18px auto;padding-bottom:22px}
-.window{
-  border:3px solid var(--deep);background:#f8f8ff;
-  box-shadow:inset 0 0 0 2px #fff,0 12px 30px #193b7b45;
-}
-.titlebar{
-  height:48px;background:linear-gradient(90deg,#244dcc,#5577e7);
-  color:#fff;display:flex;align-items:center;justify-content:space-between;
-  padding:0 8px 0 14px;border-bottom:3px solid #fff;font-weight:800;font-size:18px;
-}
-.titleleft{display:flex;align-items:center;gap:9px}.titleBottle{width:30px;height:38px;display:block}.bottleSvg{width:100%;height:100%}
-.winbuttons{display:flex;gap:4px}.winbtn{
-  width:32px;height:30px;background:linear-gradient(#fff,#d8d4ef);
-  border:2px outset #ece9ff;color:#111;font-weight:900;display:grid;place-items:center
-}
-.hero{
-  height:132px;position:relative;overflow:hidden;
-  background:
-    radial-gradient(ellipse at 10% 92%,#fff 0 15%,transparent 15.5%),
-    radial-gradient(ellipse at 27% 91%,#fff 0 21%,transparent 21.5%),
-    radial-gradient(ellipse at 49% 95%,#fff 0 17%,transparent 17.5%),
-    radial-gradient(ellipse at 70% 91%,#fff 0 20%,transparent 20.5%),
-    radial-gradient(ellipse at 91% 94%,#fff 0 19%,transparent 19.5%),
-    linear-gradient(#77baff,#cce9ff);
-  border-bottom:2px solid #a8b1ed;
-}
-.hero:after{
-  content:"✦   ✧       ✦        ✧";position:absolute;left:8%;top:20%;
-  color:#fff;font-size:20px;letter-spacing:18px;text-shadow:0 0 5px #fff
-}
-.heroBottle{position:absolute;right:7%;top:5px;width:88px;height:122px;z-index:2}
-.heroBottle .bottleSvg{width:100%;height:100%}
-.calendar{
-  background:linear-gradient(180deg,#ffffff 0%,#fbfaff 100%);
-  margin:-1px 0 0;border-top:3px solid #9aa7f3;padding:18px 10px 16px;
-  min-height:calc(100vh - 205px);
-}
-.head{display:grid;grid-template-columns:52px 1fr 52px;align-items:center;gap:8px;margin:0 6px 12px}
-.month{text-align:center;font-size:25px;font-weight:900;letter-spacing:-1px}
-.nav{
-  width:48px;height:48px;border:2px outset #e8e3ff;border-radius:7px;
-  background:linear-gradient(#f8f4ff,#ddd8ff);font-size:28px;color:#151940
-}
-.week,.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
-.week div{text-align:center;font-size:13px;font-weight:750;color:#3c426d;padding:6px 0 7px}
-.week div:first-child{color:#ed5270}.week div:last-child{color:#3159e6}
+.head{display:grid;grid-template-columns:64px 1fr 64px;align-items:center;gap:10px;margin:0 12px 18px}
+.month{text-align:center;font-size:clamp(25px,5vw,38px);font-weight:900;letter-spacing:-1px}
+.nav{height:58px;border:2px solid #c7bff2;border-radius:9px;background:linear-gradient(#faf7ff,#e3ddff);font-size:38px;color:#101638;box-shadow:inset -2px -2px 0 #bcb5d9}
+.week,.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}
+.week div{text-align:center;font-weight:800;color:#4c527a;padding:5px 0 10px}.week div:first-child{color:#f05b7d}.week div:last-child{color:#3159eb}
 .day{
-  position:relative;border:1.5px solid var(--line);border-radius:12px;
-  background:linear-gradient(145deg,#fafaff,#f3f3fb);
-  min-height:116px;padding:0;overflow:hidden;color:#171a3c;
-  display:flex;align-items:center;justify-content:center;
+ position:relative;min-height:128px;border:1.5px solid var(--line);border-radius:14px;
+ background:linear-gradient(145deg,#fcfcff,#f7f7fd);display:flex;align-items:center;justify-content:center;
+ overflow:hidden;color:var(--ink);padding:0
 }
-.empty{visibility:hidden}.today{border:2.5px solid #3156eb;background:#fff}
-.content{position:relative;z-index:2;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;width:100%;height:100%}
-.num{font-weight:850;font-size:18px;line-height:1}
-.mark{font-size:13px;line-height:1;font-weight:800;color:#5965a9;font-variant-numeric:tabular-nums}
-.doneCircle{
-  position:absolute;z-index:0;width:min(90%,88px);aspect-ratio:1;border-radius:50%;
-  background:radial-gradient(circle at 38% 32%,#f1edff,#d9d1ff 72%,#cec5ff);
-  left:50%;top:50%;transform:translate(-50%,-50%);
+.empty{visibility:hidden}.today{border:2.5px solid var(--blue);background:#fff}
+.doneCircle{position:absolute;width:min(92%,100px);aspect-ratio:1;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);background:radial-gradient(circle at 40% 35%,#f0ecff,#ddd6ff 75%,#d2caff)}
+.content{position:relative;z-index:2;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;width:100%;height:100%}
+.num{font-size:21px;font-weight:900;line-height:1}.mark{font-size:15px;font-weight:800;color:#5965a0;line-height:1;font-variant-numeric:tabular-nums}
+.miniBottle{position:absolute;z-index:3;left:7px;top:8px;width:30px;height:38px;object-fit:contain}
+.missed{background:#fff7f9}.missMark{font-size:34px;color:#d82e4a;font-weight:900;line-height:1}
+.legend{margin-top:18px;padding:14px 10px;border:1.5px solid #ddd8ef;border-radius:10px;background:#f8f5ff;display:flex;justify-content:space-around;gap:6px;font-size:12px;font-weight:800;color:#454a73}
+.legend span{display:flex;align-items:center;gap:6px}.lg{width:30px;height:30px;border-radius:50%;display:inline-grid;place-items:center}.lgd{background:#dfd8ff}.lgx{background:#ffc3cf;color:#c9233d;font-size:23px}.lgt{border:2px solid var(--blue);background:#fff}.lgn{border:2px solid #d7d9e7;background:#fff}
+.hint{text-align:center;color:#8b8fa8;font-size:12px;margin-top:12px}
+dialog{border:2px solid #3155bb;padding:0;width:min(88vw,370px);box-shadow:8px 8px 0 #18327745}dialog::backdrop{background:#1c275c66}
+.modalTitle{background:#3157d6;color:#fff;font-weight:800;padding:9px 12px}.modalBody{padding:20px;text-align:center}.modalBody h2{margin:0 0 5px}.modalBody p{color:#686e91}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.btn{border:2px outset #eeeaff;padding:12px;font-weight:800;background:#eeeef7}.yes{background:#ddd8ff}
+.timeBox{display:none;margin-top:13px;text-align:left}.timeBox label{display:block;font-size:12px;color:#666d90;margin-bottom:6px}.timeBox input{width:100%;padding:11px;font:inherit}.small{font-size:10px;color:#969bb1;margin-top:6px}
+@media(max-width:500px){
+ body{padding-top:2vw}.app{width:96vw}.panel{margin-left:7px;margin-right:7px;padding:18px 8px 14px;border-radius:20px}
+ .head{grid-template-columns:52px 1fr 52px;margin:0 8px 13px}.nav{height:50px;font-size:31px}
+ .week,.grid{gap:5px}.day{min-height:108px}.num{font-size:18px}.mark{font-size:13px}.miniBottle{width:25px;height:32px;left:5px;top:6px}
+ .legend{font-size:10px;padding:11px 5px}.lg{width:25px;height:25px}
 }
-.dropMini{position:absolute;z-index:3;left:6px;top:5px;width:27px;height:36px}.miniBottleSvg{width:100%;height:100%;display:block}
-.missed{background:linear-gradient(145deg,#fff8fa,#ffe8ec)}
-.missMark{font-size:30px;color:var(--missText);font-weight:900;line-height:1}
-.legend{
-  margin-top:15px;border:1.5px solid #d7d5ed;border-radius:10px;background:#f6f3ff;
-  display:flex;justify-content:space-around;gap:8px;padding:12px 8px;font-size:11px;font-weight:700;color:#40456e
-}
-.legend span{display:flex;align-items:center;gap:5px}.lg{width:25px;height:25px;border-radius:50%;display:inline-grid;place-items:center}
-.lgd{background:var(--lav)}.lgx{background:#ffc5cf;color:#c92740;font-size:20px}.lgt{border:2px solid #3156eb;background:#fff}.lgn{border:2px solid #d5d7e8;background:#fff}
-.hint{text-align:center;color:#777d9d;font-size:12px;margin-top:13px}
-dialog{border:3px solid var(--deep);padding:0;width:min(88vw,370px);box-shadow:8px 8px 0 #18327745}
-dialog::backdrop{background:#1c275c66}
-.modal{background:#f8f8ff}.modalTitle{background:linear-gradient(90deg,#244dcc,#5577e7);color:#fff;font-weight:800;padding:8px 11px}
-.modalBody{padding:20px;text-align:center}.modalBody h2{margin:0 0 5px}.modalBody p{color:#666d90}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}
-.btn{border:2px outset #eeeaff;padding:12px;font-weight:800;background:#eeeef7}.yes{background:#dcd8ff}.timeBox{display:none;margin-top:13px;text-align:left}.timeBox label{display:block;font-size:12px;color:#666d90;margin-bottom:6px}.timeBox input{width:100%;padding:11px;font:inherit;border:2px inset #eceaf7;background:#fff}.small{font-size:10px;color:#969bb1;margin-top:6px}
-@media(max-width:430px){
-  .app{width:97vw;margin:8px auto}.hero{height:100px}.calendar{padding:14px 7px 12px}
-  .day{min-height:98px}.grid,.week{gap:4px}.num{font-size:17px}.mark{font-size:12px}
-  .doneCircle{width:90%}.legend{font-size:10px;padding:10px 4px}
-}
-</style>
-</head>
-<body>
-<div class="app">
-  <div class="window">
-    <div class="titlebar">
-      <div class="titleleft"><span class="titleBottle"><svg class="bottleSvg" viewBox="0 0 70 100" aria-hidden="true">
-<defs><linearGradient id="bg" x1="0" x2="1"><stop stop-color="#f4d7ff"/><stop offset=".55" stop-color="#cbbcff"/><stop offset="1" stop-color="#8fa9ff"/></linearGradient></defs>
-<g transform="rotate(12 35 50)" stroke="#5368d8" stroke-width="2">
-<path d="M27 4h16v12l6 7v9H21v-9l6-7z" fill="#f8efff"/>
-<path d="M20 30h30l7 12v45c0 6-4 9-9 9H22c-5 0-9-3-9-9V42z" fill="url(#bg)"/>
-<rect x="17" y="52" width="36" height="23" rx="4" fill="#fff9ff" stroke="#9a91dd"/>
-<text x="35" y="63" text-anchor="middle" font-size="7" font-weight="800" fill="#5966cf">EYEDROP</text>
-<path d="M35 67c-5-5-11 3 0 10 11-7 5-15 0-10z" fill="#f5a5d8" stroke="none"/>
-</g></svg></span><span>자기 전 안약 체크 🌙</span></div>
-      <div class="winbuttons"><div class="winbtn">−</div><div class="winbtn">□</div><div class="winbtn">×</div></div>
-    </div>
-    <div class="hero"><div class="heroBottle"><svg class="bottleSvg" viewBox="0 0 70 100" aria-hidden="true">
-<defs><linearGradient id="bg" x1="0" x2="1"><stop stop-color="#f4d7ff"/><stop offset=".55" stop-color="#cbbcff"/><stop offset="1" stop-color="#8fa9ff"/></linearGradient></defs>
-<g transform="rotate(12 35 50)" stroke="#5368d8" stroke-width="2">
-<path d="M27 4h16v12l6 7v9H21v-9l6-7z" fill="#f8efff"/>
-<path d="M20 30h30l7 12v45c0 6-4 9-9 9H22c-5 0-9-3-9-9V42z" fill="url(#bg)"/>
-<rect x="17" y="52" width="36" height="23" rx="4" fill="#fff9ff" stroke="#9a91dd"/>
-<text x="35" y="63" text-anchor="middle" font-size="7" font-weight="800" fill="#5966cf">EYEDROP</text>
-<path d="M35 67c-5-5-11 3 0 10 11-7 5-15 0-10z" fill="#f5a5d8" stroke="none"/>
-</g></svg></div></div>
-    <div class="calendar">
-      <div class="head"><button class="nav" id="prev">‹</button><div class="month" id="month"></div><button class="nav" id="next">›</button></div>
-      <div class="week"><div>일</div><div>월</div><div>화</div><div>수</div><div>목</div><div>금</div><div>토</div></div>
-      <div class="grid" id="grid"></div>
-      <div class="legend"><span><i class="lg lgd"></i>복용 완료</span><span><i class="lg lgx">×</i>미복용</span><span><i class="lg lgt"></i>오늘</span><span><i class="lg lgn"></i>기록 없음</span></div>
-      <div class="hint">날짜를 눌러 점안 여부를 기록하거나 수정하세요.</div>
-    </div>
-  </div>
-</div>
-<dialog id="dlg">
-  <div class="modal"><div class="modalTitle">안약 체크</div><div class="modalBody">
-    <h2 id="q">안약 넣었나요?</h2><p id="sel"></p>
-    <div class="timeBox" id="timeBox"><label for="timeInput">점안 시간을 직접 입력하세요.</label><input type="time" id="timeInput"><div class="small">과거 기록과 자동 X 표시도 나중에 수정할 수 있어요.</div></div>
-    <div class="actions" id="actions"></div>
-  </div></div>
-</dialog>
+</style></head>
+<body><main class="app">
+<img class="approvedHeader" src="header.png" alt="자기 전 안약 체크">
+<section class="panel">
+<div class="head"><button class="nav" id="prev">‹</button><div class="month" id="month"></div><button class="nav" id="next">›</button></div>
+<div class="week"><div>일</div><div>월</div><div>화</div><div>수</div><div>목</div><div>금</div><div>토</div></div>
+<div class="grid" id="grid"></div>
+<div class="legend"><span><i class="lg lgd"></i>복용 완료</span><span><i class="lg lgx">×</i>미복용</span><span><i class="lg lgt"></i>오늘</span><span><i class="lg lgn"></i>기록 없음</span></div>
+<div class="hint">날짜를 눌러 점안 여부를 기록하거나 수정하세요.</div>
+</section></main>
+<dialog id="dlg"><div class="modalTitle">안약 체크</div><div class="modalBody"><h2 id="q">안약 넣었나요?</h2><p id="sel"></p>
+<div class="timeBox" id="timeBox"><label>점안 시간을 직접 입력하세요.</label><input type="time" id="timeInput"><div class="small">과거 기록과 자동 X도 나중에 수정할 수 있어요.</div></div>
+<div class="actions" id="actions"></div></div></dialog>
 <script>
-const $=s=>document.querySelector(s), K="eybelis-check-v2", OLD="eybelis-check-v1";
-let R=JSON.parse(localStorage.getItem(K)||"null");
-if(!R){const old=JSON.parse(localStorage.getItem(OLD)||"{}");R={};for(const [k,v] of Object.entries(old))R[k]={status:"done",time:v};localStorage.setItem(K,JSON.stringify(R));}
-let V=new Date(), C=null; V.setDate(1);
-const p=n=>String(n).padStart(2,"0");
-const key=d=>`${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`;
-const same=(a,b)=>a.toDateString()===b.toDateString();
+const $=s=>document.querySelector(s),K="eybelis-check-v2",OLD="eybelis-check-v1";let R=JSON.parse(localStorage.getItem(K)||"null");
+if(!R){const o=JSON.parse(localStorage.getItem(OLD)||"{}");R={};for(const[k,v]of Object.entries(o))R[k]={status:"done",time:v};localStorage.setItem(K,JSON.stringify(R))}
+let V=new Date(),C=null;V.setDate(1);const p=n=>String(n).padStart(2,"0"),key=d=>`${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`,same=(a,b)=>a.toDateString()===b.toDateString();
 function save(){localStorage.setItem(K,JSON.stringify(R))}
-
-// 기록 시작일 이전의 자동 X는 표시하지 않습니다.
-for(const k of Object.keys(R)){if(k<"2026-10-14" && R[k]?.status==="missed")delete R[k];}
-save();
-
-function cutoffPassed(d){
-  const end=new Date(d.getFullYear(),d.getMonth(),d.getDate()+1,0,0,0);
-  return Date.now()-end.getTime()>=12*60*60*1000;
-}
-function applyMissed(){
-  const start=new Date(2026,9,14); start.setHours(0,0,0,0);
-  let today=new Date(); today.setHours(0,0,0,0);
-  for(let d=new Date(start);d<today;d.setDate(d.getDate()+1)){
-    const k=key(d); if(!R[k]&&cutoffPassed(d))R[k]={status:"missed"};
-  }
-  save();
-}
-function to24(v){
-  if(!v)return"";
-  if(/^\d{1,2}:\d{2}$/.test(v)){let [h,m]=v.split(":");return `${p(Number(h))}:${m}`}
-  const m=v.match(/(오전|오후)\s*(\d{1,2}):(\d{2})/);
-  if(!m)return"";
-  let h=Number(m[2]); if(m[1]==="오전"&&h===12)h=0; if(m[1]==="오후"&&h!==12)h+=12;
-  return `${p(h)}:${m[3]}`;
-}
-function timeLabel(v){return to24(v)}
-
-function isGracePeriodFor(d){
-  const now=new Date();
-  if(now.getHours()>=5)return false;
-  const yesterday=new Date(now.getFullYear(),now.getMonth(),now.getDate()-1);
-  yesterday.setHours(0,0,0,0);
-  const target=new Date(d); target.setHours(0,0,0,0);
-  return same(target,yesterday);
-}
-
-function render(){
-  applyMissed();
-  const y=V.getFullYear(),m=V.getMonth(),g=$("#grid"),t=new Date();
-  $("#month").textContent=`${y}년 ${m+1}월`; g.innerHTML="";
-  for(let i=0;i<new Date(y,m,1).getDay();i++)g.insertAdjacentHTML("beforeend",'<div class="day empty"></div>');
-  for(let n=1;n<=new Date(y,m+1,0).getDate();n++){
-    const d=new Date(y,m,n),k=key(d),rec=R[k],b=document.createElement("button");
-    b.className="day"+(same(d,t)?" today":"")+(rec?.status==="done"?" done":"")+(rec?.status==="missed"?" missed":"");
-    let inside=`<div class="content"><div class="num">${n}</div>`;
-    if(rec?.status==="done")inside+=`<div class="mark">${timeLabel(rec.time)}</div>`;
-    else if(rec?.status==="missed")inside+=`<div class="missMark">×</div>`;
-    inside+="</div>";
-    if(rec?.status==="done")inside=`<div class="doneCircle"></div><div class="dropMini"><svg class="miniBottleSvg" viewBox="0 0 46 60" aria-hidden="true">
-<g transform="rotate(-18 23 30)" stroke="#5368d8" stroke-width="2">
-<path d="M18 2h10v8l4 4v6H14v-6l4-4z" fill="#f7efff"/>
-<path d="M13 19h20l4 8v24c0 4-3 6-6 6H15c-3 0-6-2-6-6V27z" fill="#d8d0ff"/>
-<rect x="12" y="31" width="22" height="12" rx="3" fill="#fff"/>
-<path d="M23 35c-3-3-7 2 0 7 7-5 3-10 0-7z" fill="#f2a6d8" stroke="none"/>
-</g></svg></div>`+inside;
-    b.innerHTML=inside; b.onclick=()=>openDay(d); g.appendChild(b);
-  }
-}
-function setDone(k,time){R[k]={status:"done",time};save();$("#dlg").close();render()}
-function openDay(d){
-  C=new Date(d); const k=key(C),rec=R[k],now=new Date();
-  const today=new Date(now.getFullYear(),now.getMonth(),now.getDate()); const target=new Date(C); target.setHours(0,0,0,0);
-  const past=target<today, grace=isGracePeriodFor(target);
-  $("#sel").textContent=`${C.getMonth()+1}월 ${C.getDate()}일`;
-  $("#timeBox").style.display="none"; $("#actions").innerHTML="";
-
-  // 자정이 지나도 새벽 5시 전까지는 '어제'를 오늘처럼 바로 체크할 수 있습니다.
-  if((!past || grace) && !rec){
-    $("#q").textContent="안약 넣었나요?";
-    $("#actions").innerHTML='<button class="btn" id="no2">아니요</button><button class="btn yes" id="yes2">예</button>';
-    $("#no2").onclick=()=>$("#dlg").close();
-    $("#yes2").onclick=()=>{const n=new Date();setDone(k,`${p(n.getHours())}:${p(n.getMinutes())}`)};
-  }else{
-    $("#q").textContent=rec?.status==="done"?"점안 기록을 수정할까요?":rec?.status==="missed"?"미복용 기록을 수정할까요?":"과거 점안 기록을 입력할까요?";
-    $("#timeBox").style.display="block"; $("#timeInput").value=to24(rec?.time)||"22:30";
-    $("#actions").innerHTML='<button class="btn" id="cancel">취소</button><button class="btn yes" id="saveEdit">복용 완료</button>';
-    $("#cancel").onclick=()=>$("#dlg").close();
-    $("#saveEdit").onclick=()=>setDone(k,$("#timeInput").value);
-  }
-  $("#dlg").showModal();
-}
-$("#prev").onclick=()=>{V.setMonth(V.getMonth()-1);render()};
-$("#next").onclick=()=>{V.setMonth(V.getMonth()+1);render()};
-render();
+for(const k of Object.keys(R))if(k<"2026-10-14"&&R[k]?.status==="missed")delete R[k];save();
+function cutoffPassed(d){const end=new Date(d.getFullYear(),d.getMonth(),d.getDate()+1);return Date.now()-end.getTime()>=12*60*60*1000}
+function applyMissed(){const start=new Date(2026,9,14),today=new Date();today.setHours(0,0,0,0);for(let d=new Date(start);d<today;d.setDate(d.getDate()+1)){const k=key(d);if(!R[k]&&cutoffPassed(d))R[k]={status:"missed"}}save()}
+function to24(v){if(!v)return"";if(/^\d{1,2}:\d{2}$/.test(v)){let[h,m]=v.split(":");return`${p(Number(h))}:${m}`}const m=v.match(/(오전|오후)\s*(\d{1,2}):(\d{2})/);if(!m)return"";let h=+m[2];if(m[1]==="오전"&&h===12)h=0;if(m[1]==="오후"&&h!==12)h+=12;return`${p(h)}:${m[3]}`}
+function grace(d){const n=new Date();if(n.getHours()>=5)return false;const y=new Date(n.getFullYear(),n.getMonth(),n.getDate()-1),t=new Date(d);y.setHours(0,0,0,0);t.setHours(0,0,0,0);return same(y,t)}
+function render(){applyMissed();const y=V.getFullYear(),m=V.getMonth(),g=$("#grid"),now=new Date();$("#month").textContent=`${y}년 ${m+1}월`;g.innerHTML="";
+for(let i=0;i<new Date(y,m,1).getDay();i++)g.insertAdjacentHTML("beforeend",'<div class="day empty"></div>');
+for(let n=1;n<=new Date(y,m+1,0).getDate();n++){const d=new Date(y,m,n),k=key(d),r=R[k],b=document.createElement("button");b.className="day"+(same(d,now)?" today":"")+(r?.status==="missed"?" missed":"");
+let h=`<div class="content"><div class="num">${n}</div>`;if(r?.status==="done")h+=`<div class="mark">${to24(r.time)}</div>`;else if(r?.status==="missed")h+=`<div class="missMark">×</div>`;h+="</div>";
+if(r?.status==="done")h=`<div class="doneCircle"></div><img class="miniBottle" src="bottle-mini.png" alt="">`+h;b.innerHTML=h;b.onclick=()=>openDay(d);g.appendChild(b)}}
+function setDone(k,t){R[k]={status:"done",time:t};save();$("#dlg").close();render()}
+function openDay(d){C=new Date(d);const k=key(C),r=R[k],n=new Date(),today=new Date(n.getFullYear(),n.getMonth(),n.getDate()),t=new Date(C);t.setHours(0,0,0,0);const past=t<today,ok=grace(t);
+$("#sel").textContent=`${C.getMonth()+1}월 ${C.getDate()}일`;$("#timeBox").style.display="none";$("#actions").innerHTML="";
+if((!past||ok)&&!r){$("#q").textContent="안약 넣었나요?";$("#actions").innerHTML='<button class="btn" id="no">아니요</button><button class="btn yes" id="yes">예</button>';$("#no").onclick=()=>$("#dlg").close();$("#yes").onclick=()=>{const x=new Date();setDone(k,`${p(x.getHours())}:${p(x.getMinutes())}`)}}
+else{$("#q").textContent=r?.status==="done"?"점안 기록을 수정할까요?":r?.status==="missed"?"미복용 기록을 수정할까요?":"과거 점안 기록을 입력할까요?";$("#timeBox").style.display="block";$("#timeInput").value=to24(r?.time)||"22:30";$("#actions").innerHTML='<button class="btn" id="cancel">취소</button><button class="btn yes" id="edit">복용 완료</button>';$("#cancel").onclick=()=>$("#dlg").close();$("#edit").onclick=()=>setDone(k,$("#timeInput").value)}
+$("#dlg").showModal()}
+$("#prev").onclick=()=>{V.setMonth(V.getMonth()-1);render()};$("#next").onclick=()=>{V.setMonth(V.getMonth()+1);render()};render();
 if("serviceWorker"in navigator)navigator.serviceWorker.register("./sw.js",{updateViaCache:"none"}).then(r=>r.update());
-</script>
-</body></html>
+</script></body></html>

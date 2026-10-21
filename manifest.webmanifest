@@ -3,13 +3,13 @@
   "short_name": "안약 체크",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#78b8ff",
-  "theme_color": "#3858d7",
+  "background_color": "#72b8ff",
+  "theme_color": "#3157d6",
   "icons": [
     {
-      "src": "icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ]
