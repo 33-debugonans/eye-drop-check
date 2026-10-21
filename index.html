@@ -163,7 +163,7 @@ body{
 }
 .done-badge img{
   position:absolute;
-  width:34%;
+  width:42%;
   height:auto;
   left:-6%;
   top:-19%;
@@ -314,7 +314,7 @@ dialog::backdrop{background:rgba(30,42,88,.40)}
 
 <dialog id="dlg">
   <div class="popup-head">
-    <img class="popup-bottle" src="popup-bottle.png?v=25" alt="">
+    <img class="popup-bottle" src="popup-bottle.png?v=26" alt="">
     <span>안약 체크</span>
     <button class="popup-close" id="closeDlg" aria-label="닫기">×</button>
   </div>
@@ -407,7 +407,7 @@ function render(){
     if(rec && rec.status==="yes"){
       cell.classList.add("done");
       const badge=document.createElement("div"); badge.className="done-badge";
-      const img=document.createElement("img"); img.src="bottle-mini.png?v=25"; img.alt="";
+      const img=document.createElement("img"); img.src="bottle-mini.png?v=26"; img.alt="";
       badge.appendChild(img); cell.appendChild(badge);
       core.appendChild(num);
       const tm=document.createElement("div"); tm.className="time"; tm.textContent=rec.time||"";
