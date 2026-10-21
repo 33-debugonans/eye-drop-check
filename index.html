@@ -19,7 +19,7 @@ html,body{width:100%;height:100%;margin:0;overflow:hidden}
 body{
   font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;
   color:var(--ink);
-  background:#8cc3f7 url("background.jpg") center center / 100% 100% no-repeat;
+  background:#8cc3f7 url("background.jpg?v=18") center center / 100% 100% no-repeat;
 }
 
 /* 시안 비율: 화면 아래에 꽃밭이 충분히 남도록 달력을 짧게 고정 */
@@ -199,31 +199,31 @@ body{
 
 /* 팝업 — 기능은 dialog overlay 그대로, 외형은 시안 기준 */
 dialog{
-  width:min(78.5vw,680px);
+  width:min(72vw,560px);
   padding:0;
   border:1.25px solid #6677d1;
-  border-radius:17px;
+  border-radius:15px;
   overflow:hidden;
   background:#fbfaff;
   box-shadow:0 5px 0 rgba(56,67,137,.13);
 }
 dialog::backdrop{background:rgba(30,42,88,.40)}
 .popup-head{
-  height:5.3svh;
-  min-height:55px;
+  height:4.5svh;
+  min-height:46px;
   position:relative;
   display:flex;
   align-items:center;
-  padding:0 58px 0 68px;
+  padding:0 52px 0 58px;
   background:linear-gradient(90deg,#3f70e9 0%,#6683e9 100%);
   color:#fff;
-  font-size:clamp(15px,2.2vw,19px);
+  font-size:clamp(13px,1.75vw,16px);
   font-weight:620;
 }
 .popup-bottle{
   position:absolute;
-  left:14px;top:50%;
-  width:45px;height:49px;
+  left:12px;top:50%;
+  width:38px;height:41px;
   transform:translateY(-50%);
   object-fit:cover;
   object-position:45% 45%;
@@ -233,47 +233,47 @@ dialog::backdrop{background:rgba(30,42,88,.40)}
   position:absolute;
   right:12px;top:50%;
   transform:translateY(-50%);
-  width:39px;height:39px;
+  width:34px;height:34px;
   border:1px solid #a79cd6;
   border-radius:5px;
   background:#faeaff;
   color:#17183c;
   display:grid;place-items:center;
-  font-size:28px;
+  font-size:23px;
   font-weight:400;
   line-height:1;
   cursor:pointer;
 }
 .popup-body{
-  padding:3.0svh 5.2% 2.55svh;
+  padding:2.2svh 5.2% 2.0svh;
   text-align:center;
   background:linear-gradient(180deg,#fff 0%,#fbfaff 100%);
 }
 .popup-body h2{
   margin:0 0 .85svh;
   color:#15173c;
-  font-size:clamp(25px,4.1vw,35px);
-  font-weight:720;
+  font-size:clamp(20px,3.0vw,27px);
+  font-weight:700;
   letter-spacing:-1.4px;
 }
 .popup-date{
   color:#777c9b;
-  font-size:clamp(14px,2.15vw,18px);
+  font-size:clamp(12px,1.75vw,15px);
 }
 .popup-actions{
-  margin-top:2.5svh;
+  margin-top:1.8svh;
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:2.1%;
 }
 .popup-btn{
-  height:5.9svh;
-  min-height:57px;
+  height:5.0svh;
+  min-height:48px;
   border:1px solid #cbc7e7;
   border-radius:11px;
   background:#f7f6fb;
   color:#17172f;
-  font-size:clamp(15px,2.2vw,19px);
+  font-size:clamp(13px,1.8vw,16px);
   font-weight:680;
   box-shadow:none;
 }
@@ -286,7 +286,7 @@ dialog::backdrop{background:rgba(30,42,88,.40)}
 </head>
 <body>
 <main class="app">
-  <div class="titlebar"><img src="titlebar.jpg" alt="자기 전 안약 체크"></div>
+  <div class="titlebar"><img src="titlebar.jpg?v=18" alt="자기 전 안약 체크"></div>
   <section class="calendar">
     <div class="month-row">
       <button class="arrow" id="prev" aria-label="이전 달">‹</button>
@@ -306,7 +306,7 @@ dialog::backdrop{background:rgba(30,42,88,.40)}
 
 <dialog id="dlg">
   <div class="popup-head">
-    <img class="popup-bottle" src="bottle-popup.jpg" alt="">
+    <img class="popup-bottle" src="bottle-popup.jpg?v=18" alt="">
     <span>안약 체크</span>
     <button class="popup-close" id="closeDlg" aria-label="닫기">×</button>
   </div>
@@ -320,9 +320,27 @@ dialog::backdrop{background:rgba(30,42,88,.40)}
 
 <script>
 const KEY="eybelis-check-v1";
+const MIGRATION_KEY="eybelis-v18-restored-known-records";
 const AUTO_X_START="2026-10-14";
 let data={};
 try{ data=JSON.parse(localStorage.getItem(KEY)||"{}"); }catch(e){ data={}; }
+
+// v17에서 기존 완료 기록이 X로 덮인 문제를 1회 복구.
+// 이전 화면에서 실제 확인된 기록만 복구하며, 이후 사용자가 수정한 값은 다시 건드리지 않는다.
+if(!localStorage.getItem(MIGRATION_KEY)){
+  const known={
+    "2026-10-14":"02:17",
+    "2026-10-15":"00:49",
+    "2026-10-16":"00:30",
+    "2026-10-17":"03:00",
+    "2026-10-18":"12:30",
+    "2026-10-19":"23:43",
+    "2026-10-20":"22:27"
+  };
+  for(const [k,time] of Object.entries(known)) data[k]={status:"yes",time};
+  localStorage.setItem(KEY,JSON.stringify(data));
+  localStorage.setItem(MIGRATION_KEY,"1");
+}
 
 const now=new Date();
 let viewY=now.getFullYear(), viewM=now.getMonth();
@@ -344,9 +362,11 @@ function formatTime(d){return `${pad(d.getHours())}:${pad(d.getMinutes())}`}
 function displayDate(k){let [y,m,d]=k.split("-").map(Number);return `${m}월 ${d}일`}
 
 function maybeAutoX(){
+  // "12시간 미체크" = 하루가 끝난 뒤 다음 날 정오가 지나도 기록이 없을 때만 X.
+  // 오늘 날짜를 당일 정오에 X 처리하던 v17 오류를 수정했다.
   const t=new Date();
-  const cutoff=new Date(t); cutoff.setHours(12,0,0,0);
-  if(t<cutoff) cutoff.setDate(cutoff.getDate()-1);
+  const cutoff=new Date(t.getFullYear(),t.getMonth(),t.getDate()-1);
+  if(t.getHours()<12) cutoff.setDate(cutoff.getDate()-1);
   let cursor=new Date(2026,9,14);
   while(cursor<=cutoff){
     const k=keyOf(cursor.getFullYear(),cursor.getMonth(),cursor.getDate());
@@ -379,7 +399,7 @@ function render(){
     if(rec && rec.status==="yes"){
       cell.classList.add("done");
       const badge=document.createElement("div"); badge.className="done-badge";
-      const img=document.createElement("img"); img.src="bottle-mini.png"; img.alt="";
+      const img=document.createElement("img"); img.src="bottle-mini.png?v=18"; img.alt="";
       badge.appendChild(img); cell.appendChild(badge);
       core.appendChild(num);
       const tm=document.createElement("div"); tm.className="time"; tm.textContent=rec.time||"";
